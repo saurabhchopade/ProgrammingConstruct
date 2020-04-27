@@ -12,8 +12,8 @@ totalWorkingDays=0;
 totalEmpHours=0;
 totalWage=0;
 
-# Array Declaration
-declare -a dailyWage
+# Dictionary Declaration
+declare -A  dailyWage
 
 	function getWorkingHours() {
 
@@ -34,7 +34,7 @@ declare -a dailyWage
 # To calculate  works Hours Daily
 
 	function calcWorkHours {
-		
+
 		echo	$(( $1 * $EMP_RATE_PER_HR ));
 	}
 
@@ -44,10 +44,11 @@ declare -a dailyWage
 		((totalWorkingDays++));
 		randomCheck=$(( RANDOM%3 ));
       workHours="$( getWorkingHours $randomCheck )";
-		totalEmpHours=$(( $totalEmpHours + $workHours ))
-		dailyWage[$totalWorkingDays]="$( calcWorkHours $workHours)";
-		
+		totalEmpHours=$(( $totalEmpHours + $workHours ));
+		dailyWage["DAY" "$totalWorkingDays"]="$( calcWorkHours $workHours)";
+
 	done
 
-totalWage=$(( $totalEmpHours * $EMP_RATE_PER_HR ));
+echo "Days" ${!dailyWage[@]};
 echo "DailyWage=" ${dailyWage[@]};
+totalWage=$(( $totalEmpHours * $EMP_RATE_PER_HR ));
