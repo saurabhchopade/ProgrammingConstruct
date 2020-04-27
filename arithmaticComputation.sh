@@ -7,41 +7,41 @@
 #6)StoreResult in Dict to Array
 #7)Descending Order Of Array
 #8)Assending Order Of Array
+
+counter=0;
+declare -A dictStorage
 read -p "Enter First Number=" a;
 read -p "Enter Second Number=" b;
 read -p "Enter Third Number=" c;
-	function firstOperation(){
 
+	function firstOperation(){
 		#For Bc Perpose We are added Result variable
 		result=$((echo "$1 + $2" | bc -l ) );
 		finalResult=$(( echo "$result*$3" | bc -l ) );
 		echo $finalResult;
 	}
 	function secondOperation(){
-
      	result=$((echo "$1 * $2" | bc -l ) );
       finalResult=$(( echo "$result+$3" | bc -l ) );
       echo $finalResult;
    }
 	function thirdOperation(){
-
       result=$((echo "$3 + $1" | bc -l ) );
       finalResult=$(( echo "$result/$2" | bc -l ) );
       echo $finalResult;
    }
 	function fourthOperation(){
-
       result=$((echo "$1 % $2" | bc -l ) );
       finalResult=$(( echo "$result+$3" | bc -l ) );
       echo $finalResult;
    }
+
 	for (( index=1; index<=10; index++ ));
 	do
-
+		output=0;
 		printf "\n\n\n"
 		echo "1)Compute a + b * c";
 		echo "2)Compute a * b + c";
-		echo "2)Compute a + b / c";
 		echo "3)Compute a + b / c";
 		echo "4)Compute a % b + c"
 		read -p "Enter Option" option;
@@ -69,12 +69,19 @@ read -p "Enter Third Number=" c;
 				;;
 		esac
 
+		dictStorage[((counter++))]=$output;
+		dictStorage[$index]=$output;
 		printf "\n\n\n";
 		read -p "PRESS Continue=(y) Cancel=(n)" check;
 
 			if [[ $check == "n" ]];
 			then
+
+				echo	${dictStorage[@]};
+				printf "\n\n\n"
+				echo "Dictionary elements="	${dictStorage[@]};
 				exit 1;
 			fi;
 
 	done;
+
