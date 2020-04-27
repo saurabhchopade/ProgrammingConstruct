@@ -7,9 +7,10 @@
 #6)StoreResult in Dict to Array
 #7)Descending Order Of Array
 #8)Assending Order Of Array
-
 counter=0;
 declare -A dictStorage
+declare -A dictStorage;
+declare -a arrayStorage;
 read -p "Enter First Number=" a;
 read -p "Enter Second Number=" b;
 read -p "Enter Third Number=" c;
@@ -43,7 +44,7 @@ read -p "Enter Third Number=" c;
 		echo "1)Compute a + b * c";
 		echo "2)Compute a * b + c";
 		echo "3)Compute a + b / c";
-		echo "4)Compute a % b + c"
+		echo "4)Compute a % b + c";
 		read -p "Enter Option" option;
 
 		case $option in
@@ -68,20 +69,19 @@ read -p "Enter Third Number=" c;
 				echo "Enter Right Option";
 				;;
 		esac
-
-		dictStorage[((counter++))]=$output;
+		
+		#Dictionary to array
 		dictStorage[$index]=$output;
+		arrayStorage[(($index))]="$dictStorage[$index]=$output";				
 		printf "\n\n\n";
 		read -p "PRESS Continue=(y) Cancel=(n)" check;
+			
 
 			if [[ $check == "n" ]];
 			then
-
-				echo	${dictStorage[@]};
 				printf "\n\n\n"
 				echo "Dictionary elements="	${dictStorage[@]};
+				echo "Array elements="   ${arrayStorage[@]};
 				exit 1;
 			fi;
-
 	done;
-
