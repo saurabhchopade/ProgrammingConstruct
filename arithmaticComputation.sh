@@ -15,25 +15,41 @@ read -p "Enter First Number=" a;
 read -p "Enter Second Number=" b;
 read -p "Enter Third Number=" c;
 
+	function myDescendingsort() {
+		for (( index1=1; index1<10; index1++ ))
+		do
+      
+			for (( index2=index1;index2<=10;index2++  ))
+			do
+				if [[ ${arrayStorage[index2]} > ${arrayStorage[index1]} ]]
+				then
+					temp=${arrayStorage[index1]};
+					arrayStorage[((index1))]=${arrayStorage[index2]};
+					arrayStorage[((index2))]=$temp;
+
+				fi;	
+			done;
+		done;
+	}
 	function firstOperation(){
 		#For Bc Perpose We are added Result variable
-		result=$((echo "$1 + $2" | bc -l ) );
-		finalResult=$(( echo "$result*$3" | bc -l ) );
+		result=$(($1 + $2 ));
+		finalResult=$(($result*$3 ));
 		echo $finalResult;
 	}
 	function secondOperation(){
-     	result=$((echo "$1 * $2" | bc -l ) );
-      finalResult=$(( echo "$result+$3" | bc -l ) );
+     	result=$(($1 * $2 ) );
+      finalResult=$(( $result+$3));
       echo $finalResult;
    }
 	function thirdOperation(){
-      result=$((echo "$3 + $1" | bc -l ) );
-      finalResult=$(( echo "$result/$2" | bc -l ) );
+      result=$(($3 + $1 ));
+      finalResult=$(( $result/$2));
       echo $finalResult;
    }
 	function fourthOperation(){
-      result=$((echo "$1 % $2" | bc -l ) );
-      finalResult=$(( echo "$result+$3" | bc -l ) );
+      result=$(($1 % $2));
+      finalResult=$(( $result+$3));
       echo $finalResult;
    }
 
@@ -82,6 +98,8 @@ read -p "Enter Third Number=" c;
 				printf "\n\n\n"
 				echo "Dictionary elements="	${dictStorage[@]};
 				echo "Array elements="   ${arrayStorage[@]};
+				myDescendingsort $arrayStorage;
+				echo "Descending Sorted=" ${arrayStorage[@]};
 				exit 1;
 			fi;
 	done;
