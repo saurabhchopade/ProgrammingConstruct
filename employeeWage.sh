@@ -1,25 +1,23 @@
 #!/bin/bash -x
 
-isPartTiem=2;
+isPartTime=2;
 isFullTime=1;
 empRatePerHr=50;
-randomCheck=$((RANDOM%3));
+randomCheck=$(( RANDOM%3 ));
 
-	if [[ $isFullTime -eq $randomCheck ]]
-	then
+	case $randomCheck in
 
-		empHours=8;
+		$isFullTime)
+			empHours=8;
+         ;;
+		$isPartTime)
+			empHours=4;
+			;;
+		*)
+			empHours=0;
+			;;
 
-	elif [[ $isPartTime -eq $randomCheck ]]
-	then
-
-		empHours=4;
-
-	else
-
-		empHours=0;
-
-	fi;
+	esac
 
 salary=$(( $empHours*$empRatePerHr ));
 echo "Salary=" $salary;
