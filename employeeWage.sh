@@ -3,21 +3,31 @@
 isPartTime=2;
 isFullTime=1;
 empRatePerHr=50;
-randomCheck=$(( RANDOM%3 ));
+workingDays=30;
+totalSalary=0;
 
-	case $randomCheck in
+	for ((day=1; day<=30;day++ ))
+	do
+		randomCheck=$(( RANDOM%3 ));
 
-		$isFullTime)
-			empHours=8;
-         ;;
-		$isPartTime)
-			empHours=4;
-			;;
-		*)
-			empHours=0;
-			;;
+		case $randomCheck in
 
-	esac
+			$isFullTime)
+				empHours=8;
+	         ;;
+			$isPartTime)
 
-salary=$(( $empHours*$empRatePerHr ));
-echo "Salary=" $salary;
+				empHours=4;
+				;;
+			*)
+				empHours=0;
+				;;
+
+		esac
+
+		salary=$(( $empHours*$empRatePerHr ));
+		totalSalary=$(( $totalSalary+$salary ));
+
+	done
+
+echo "Total sallary=" $totalSalary;
