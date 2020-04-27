@@ -11,25 +11,28 @@ NUM_WORKING_DAYS=10;
 totalWorkingDays=0;
 totalEmpHours=0;
 
+	function getWorkingHours() {
+		case $1 in
+
+      	   $IS_FULL_TIME)
+         	   empHours=8;
+            	;;
+         	$IS_PART_TIME)
+            	empHours=4;
+            	;;
+         	*)
+            	empHours=0;
+            	;;
+		esac
+  		echo $empHours
+	}
+
 	while  [[ $totalWorkingDays -le $NUM_WORKING_DAYS ]] && [[ $totalEmpHours -lt $MAX_HOURS_IN_MONTH ]]
 	do
 
 		((totalWorkingDays++));
 		randomCheck=$(( RANDOM%3 ));
-
-		case $randomCheck in
-
-			$IS_FULL_TIME)
-				empHours=8;
-	         ;;
-			$IS_PART_TIME)
-				empHours=4;
-				;;
-			*)
-				empHours=0;
-				;;
-		esac
-
-		totalEmpHours=$(( $totalEmpHours + $empHours ));
+      workHours="$( getWorkingHours $randomCheck )";
+		totalEmpHours=$(( $totalEmpHours + $workHours ));
 
 	done
